@@ -1,7 +1,7 @@
 // Rover Object Goes Here
 var roverObj = {
   direction: "N",
-  x: 9,
+  x: 0,
   y: 0
 }
 
@@ -45,28 +45,28 @@ function moveForward(rover){
   {
     case "N":
       if (rover.y === 9) {
-        break;
+        return y;
       }
       rover.y += 1;
-      break;
+      return y;
     case "W":
       if (rover.x === 0) {
-        break;
+        return x;
       }
       rover.x -= 1;
-      break;
+      return x;
     case "S":
       if (rover.y === 0) {
-        break;
+        return y;
       }
       rover.y -= 1;
-      break;
+      return y;
     case "E":
       if (rover.x === 9) {
-        break;
+        return x;
       }
       rover.x += 1;
-      break;
+      return x;
   }
 }
 
