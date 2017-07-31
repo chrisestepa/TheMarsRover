@@ -14,12 +14,16 @@ function turnLeft(rover){
   switch (rover.direction)
   {
     case "N": rover.direction = "W";
+    roverObj.direction = rover.direction;
     break;
     case "W": rover.direction = "S";
+    roverObj.direction = rover.direction;
     break;
     case "S": rover.direction = "E";
+    roverObj.direction = rover.direction;
     break;
     case "E": rover.direction = "N";
+    roverObj.direction = rover.direction;
     break;
   }
 }
@@ -44,46 +48,65 @@ function moveForward(rover){
   switch (rover.direction)
   {
     case "N":
-      if (rover.y === 9) {
-        return y;
-      }
-      rover.y += 1;
-      return y;
-    case "W":
-      if (rover.x === 0) {
-        return x;
-      }
-      rover.x -= 1;
-      return x;
-    case "S":
-      if (rover.y === 0) {
-        return y;
+      if (rover.y == 0) {
+        roverObj.y = rover.y;
+        roverObj.x = rover.x;
+        break;
       }
       rover.y -= 1;
-      return y;
+      roverObj.y = rover.y;
+      roverObj.x = rover.x;
+      break;
+    case "W":
+      if (rover.x == 0) {
+        roverObj.y = rover.y;
+        roverObj.x = rover.x;
+        break;
+      }
+      rover.x -= 1;
+      roverObj.y = rover.y;
+      roverObj.x = rover.x;
+      break;
+    case "S":
+      if (rover.y == 9) {
+        roverObj.y = rover.y;
+        roverObj.x = rover.x;
+        break;
+      }
+      rover.y += 1;
+      roverObj.y = rover.y;
+      roverObj.x = rover.x;
+      break;
     case "E":
-      if (rover.x === 9) {
-        return x;
+      if (rover.x == 9) {
+        roverObj.y = rover.y;
+        roverObj.x = rover.x;
+        break;
       }
       rover.x += 1;
-      return x;
+      roverObj.y = rover.y;
+      roverObj.x = rover.x;
+      break;
   }
 }
 
 function roverApp(command) {
   for (var i = 0; i < command.length; i++) {
     if (command[i] === "f") {
-      moveForward(command[i]);
+      moveForward(roverObj);
     }
     if (command[i] === "r") {
-      turnRight(command[i]);
+      turnRight(roverObj);
     }
     if (command[i] === "l") {
-      turnLeft(command[i]);
+      turnLeft(roverObj);
     }
   }
 }
 
 console.log("Start position: " + roverObj.x + ", " + roverObj.y);
 
-roverApp("rffrfflfrff");
+roverApp("rffrfflfrfflff");
+
+console.log("End position: " + roverObj.x + ", " + roverObj.y);
+console.log("Direction: " + roverObj.direction);
