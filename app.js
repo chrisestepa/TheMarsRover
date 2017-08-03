@@ -1,30 +1,44 @@
 // Rover Object Goes Here
 var roverObj = {
-  direction: "N",
+  direction: "E",
   x: 0,
   y: 0,
   travelLog: [0, 0]
 }
 
+var rover2Obj = {
+  direction: "N",
+  x: 9,
+  y: 9,
+  travelLog: [9, 9]
+}
 
-// ======================
+var map = [
+  ["R", "L", "L", "L", "L", "L", "L", "L", "L", "L"],
+  ["L", "L", "O", "L", "L", "L", "L", "L", "O", "L"],
+  ["L", "L", "L", "L", "L", "L", "L", "L", "L", "L"],
+  ["L", "L", "L", "L", "L", "L", "L", "L", "L", "L"],
+  ["L", "O", "L", "L", "L", "L", "L", "L", "L", "L"],
+  ["L", "L", "L", "L", "L", "L", "L", "L", "L", "O"],
+  ["L", "L", "O", "O", "O", "L", "L", "L", "L", "L"],
+  ["L", "L", "L", "L", "L", "L", "L", "L", "L", "L"],
+  ["L", "L", "L", "L", "L", "L", "L", "L", "L", "L"],
+  ["L", "L", "L", "L", "L", "L", "L", "L", "L", "R"],];
 
-// ======================
+
+// GIROS ROVER 1
+
 function turnLeft(rover){
   console.log("turnLeft was called!");
   switch (rover.direction)
   {
     case "N": rover.direction = "W";
-    roverObj.direction = rover.direction;
     break;
     case "W": rover.direction = "S";
-    roverObj.direction = rover.direction;
     break;
     case "S": rover.direction = "E";
-    roverObj.direction = rover.direction;
     break;
     case "E": rover.direction = "N";
-    roverObj.direction = rover.direction;
     break;
   }
 }
@@ -44,57 +58,71 @@ function turnRight(rover){
   }
 }
 
+// AVANZAR Y RETROCEDER
+
 function moveForward(rover){
   console.log("moveForward was called");
   switch (rover.direction)
   {
     case "N":
       if (rover.y === 0) {
-        roverObj.travelLog.push(roverObj.x, roverObj.y);
-        roverObj.y = rover.y;
-        roverObj.x = rover.x;
         break;
       }
+      map[rover.y][rover.x] = "L";
       rover.y -= 1;
-      roverObj.travelLog.push(roverObj.x, roverObj.y);
-      roverObj.y = rover.y;
-      roverObj.x = rover.x;
+      if (map[rover.y][rover.x] === "L") {
+        rover.travelLog.push(rover.x, rover.y);
+        map[rover.y][rover.x] = "R";
+      }
+      else {
+        rover.y += 1;
+        console.log("Obstáculo en el camino!");
+      }
       break;
     case "W":
       if (rover.x === 0) {
-        roverObj.travelLog.push(roverObj.x, roverObj.y);
-        roverObj.y = rover.y;
-        roverObj.x = rover.x;
         break;
       }
+      map[rover.y][rover.x] = "L";
       rover.x -= 1;
-      roverObj.travelLog.push(roverObj.x, roverObj.y);
-      roverObj.y = rover.y;
-      roverObj.x = rover.x;
+      if (map[rover.y][rover.x] === "L") {
+        rover.travelLog.push(rover.x, rover.y);
+        map[rover.y][rover.x] = "R";
+      }
+      else {
+        rover.x += 1;
+        console.log("Obstáculo en el camino!");
+      }
       break;
     case "S":
       if (rover.y === 9) {
-        roverObj.travelLog.push(roverObj.x, roverObj.y);
-        roverObj.y = rover.y;
-        roverObj.x = rover.x;
         break;
       }
+      map[rover.y][rover.x] = "L";
       rover.y += 1;
-      roverObj.travelLog.push(roverObj.x, roverObj.y);
-      roverObj.y = rover.y;
-      roverObj.x = rover.x;
+      if (map[rover.y][rover.x] === "L") {
+        rover.travelLog.push(rover.x, rover.y);
+        map[rover.y][rover.x] = "R";
+      }
+      else {
+        rover.y -= 1;
+        console.log("Obstáculo en el camino!");
+      }
       break;
     case "E":
       if (rover.x === 9) {
-        roverObj.travelLog.push(roverObj.x, roverObj.y);
-        roverObj.y = rover.y;
-        roverObj.x = rover.x;
         break;
       }
+      map[rover.y][rover.x] = "L";
       rover.x += 1;
-      roverObj.travelLog.push(roverObj.x, roverObj.y);
-      roverObj.y = rover.y;
-      roverObj.x = rover.x;
+      if (map[rover.y][rover.x] === "L") {
+        rover.travelLog.push(rover.x, rover.y);
+        map[rover.y][rover.x] = "R";
+      }
+      else {
+        rover.x -= 1;
+        console.log("Obstáculo en el camino!");
+      }
       break;
   }
 }
@@ -105,60 +133,74 @@ function moveBackward(rover){
   {
     case "N":
       if (rover.y === 9) {
-        roverObj.travelLog.push(roverObj.x, roverObj.y);
-        roverObj.y = rover.y;
-        roverObj.x = rover.x;
         break;
       }
+      map[rover.y][rover.x] = "L";
       rover.y += 1;
-      roverObj.travelLog.push(roverObj.x, roverObj.y);
-      roverObj.y = rover.y;
-      roverObj.x = rover.x;
+      if (map[rover.y][rover.x] === "L") {
+        rover.travelLog.push(rover.x, rover.y);
+        map[rover.y][rover.x] = "R";
+      }
+      else {
+        rover.y -= 1;
+        console.log("Obstáculo en el camino!");
+      }
       break;
     case "W":
       if (rover.x === 9) {
-        roverObj.travelLog.push(roverObj.x, roverObj.y);
-        roverObj.y = rover.y;
-        roverObj.x = rover.x;
         break;
       }
+      map[rover.y][rover.x] = "L";
       rover.x += 1;
-      roverObj.travelLog.push(roverObj.x, roverObj.y);
-      roverObj.y = rover.y;
-      roverObj.x = rover.x;
+      if (map[rover.y][rover.x] === "L") {
+        rover.travelLog.push(rover.x, rover.y);
+        map[rover.y][rover.x] = "R";
+      }
+      else {
+        rover.x -= 1;
+        console.log("Obstáculo en el camino!");
+      }
       break;
     case "S":
       if (rover.y === 0) {
-        roverObj.travelLog.push(roverObj.x, roverObj.y);
-        roverObj.y = rover.y;
-        roverObj.x = rover.x;
         break;
       }
+      map[rover.y][rover.x] = "L";
       rover.y -= 1;
-      roverObj.travelLog.push(roverObj.x, roverObj.y);
-      roverObj.y = rover.y;
-      roverObj.x = rover.x;
+      if (map[rover.y][rover.x] === "L") {
+        rover.travelLog.push(rover.x, rover.y);
+        map[rover.y][rover.x] = "R";
+      }
+      else {
+        rover.y += 1;
+        console.log("Obstáculo en el camino!");
+      }
       break;
     case "E":
       if (rover.x === 0) {
-        roverObj.travelLog.push(roverObj.x, roverObj.y);
-        roverObj.y = rover.y;
-        roverObj.x = rover.x;
         break;
       }
+      map[rover.y][rover.x] = "L";
       rover.x -= 1;
-      roverObj.travelLog.push(roverObj.x, roverObj.y);
-      roverObj.y = rover.y;
-      roverObj.x = rover.x;
+      if (map[rover.y][rover.x] === "L") {
+        rover.travelLog.push(rover.x, rover.y);
+        map[rover.y][rover.x] = "R";
+      }
+      else {
+        rover.x += 1;
+        console.log("Obstáculo en el camino!");
+      }
       break;
   }
 }
+
+// FUNCIONES PRINCIPALES
 
 function roverApp(command) {
   var sec = 1;
 
   for (var j = 0; j < command.length; j++) {
-    if (command[j] != "f" && command[j] != "r" && command[j] != "l" && comman[j] != "b") {
+    if (command[j] != "f" && command[j] != "r" && command[j] != "l" && command[j] != "b") {
       sec = 0;
       }
     }
@@ -184,14 +226,94 @@ function roverApp(command) {
     }
 }
 
-console.log("Start position: " + roverObj.x + ", " + roverObj.y);
+function rover2App(command) {
+  var sec = 1;
 
-roverApp("rffrfflfrff");
+  for (var j = 0; j < command.length; j++) {
+    if (command[j] != "f" && command[j] != "r" && command[j] != "l" && command[j] != "b") {
+      sec = 0;
+      }
+    }
 
-//console.log("End position: " + roverObj.x + ", " + roverObj.y);
-//console.log("Direction: " + roverObj.direction);
-
-console.log("Movimientos del Rover: ");
-for (var i = 0; i < roverObj.travelLog.length; i = i + 2) {
-  console.log(roverObj.travelLog[i] + ", " + roverObj.travelLog[i+1]);
+  if (sec) {
+    for (var i = 0; i < command.length; i++) {
+      if (command[i] === "f") {
+        moveForward(rover2Obj);
+      }
+      if (command[i] === "r") {
+        turnRight(rover2Obj);
+      }
+      if (command[i] === "l") {
+        turnLeft(rover2Obj);
+      }
+      if (command[i] === "b") {
+        moveBackward(rover2Obj);
+      }
+    }
+  }
+    else {
+      console.log("Secuencia de movimientos errónea.");
+    }
 }
+
+// IMPRESIONES
+
+console.log("Posición inicial Rover 1: " + roverObj.x + ", " + roverObj.y);
+roverApp("f");
+console.log("Nueva posición Rover 1: " + roverObj.x + ", " + roverObj.y);
+console.log("Orientación Rover 1: " + roverObj.direction);
+
+console.log("Posición inicial Rover 2: " + rover2Obj.x + ", " + rover2Obj.y);
+rover2App("b");
+console.log("Nueva posición Rover 2: " + rover2Obj.x + ", " + rover2Obj.y);
+console.log("Orientación Rover 2: " + rover2Obj.direction);
+
+console.log("Posición inicial Rover 1: " + roverObj.x + ", " + roverObj.y);
+roverApp("f");
+console.log("Nueva posición Rover 1: " + roverObj.x + ", " + roverObj.y);
+console.log("Orientación Rover 1: " + roverObj.direction);
+
+console.log("Posición inicial Rover 2: " + rover2Obj.x + ", " + rover2Obj.y);
+rover2App("l");
+console.log("Nueva posición Rover 2: " + rover2Obj.x + ", " + rover2Obj.y);
+console.log("Orientación Rover 2: " + rover2Obj.direction);
+
+console.log("Posición inicial Rover 1: " + roverObj.x + ", " + roverObj.y);
+roverApp("r");
+console.log("Nueva posición Rover 1: " + roverObj.x + ", " + roverObj.y);
+console.log("Orientación Rover 1: " + roverObj.direction);
+
+console.log("Posición inicial Rover 2: " + rover2Obj.x + ", " + rover2Obj.y);
+rover2App("f");
+console.log("Nueva posición Rover 2: " + rover2Obj.x + ", " + rover2Obj.y);
+console.log("Orientación Rover 2: " + rover2Obj.direction);
+
+console.log("Posición inicial Rover 1: " + roverObj.x + ", " + roverObj.y);
+roverApp("f");
+console.log("Nueva posición Rover 1: " + roverObj.x + ", " + roverObj.y);
+console.log("Orientación Rover 1: " + roverObj.direction);
+
+console.log("Posición inicial Rover 2: " + rover2Obj.x + ", " + rover2Obj.y);
+rover2App("r");
+console.log("Nueva posición Rover 2: " + rover2Obj.x + ", " + rover2Obj.y);
+console.log("Orientación Rover 2: " + rover2Obj.direction);
+
+console.log("Posición inicial Rover 1: " + roverObj.x + ", " + roverObj.y);
+roverApp("l");
+console.log("Nueva posición Rover 1: " + roverObj.x + ", " + roverObj.y);
+console.log("Orientación Rover 1: " + roverObj.direction);
+
+console.log("Posición inicial Rover 2: " + rover2Obj.x + ", " + rover2Obj.y);
+rover2App("f");
+console.log("Nueva posición Rover 2: " + rover2Obj.x + ", " + rover2Obj.y);
+console.log("Orientación Rover 2: " + rover2Obj.direction);
+
+console.log("Posición inicial Rover 1: " + roverObj.x + ", " + roverObj.y);
+roverApp("r");
+console.log("Nueva posición Rover 1: " + roverObj.x + ", " + roverObj.y);
+console.log("Orientación Rover 1: " + roverObj.direction);
+
+console.log("Posición inicial Rover 2: " + rover2Obj.x + ", " + rover2Obj.y);
+rover2App("f");
+console.log("Nueva posición Rover 2: " + rover2Obj.x + ", " + rover2Obj.y);
+console.log("Orientación Rover 2: " + rover2Obj.direction);
